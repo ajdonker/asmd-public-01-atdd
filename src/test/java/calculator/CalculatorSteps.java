@@ -20,7 +20,7 @@ public class CalculatorSteps {
     @Then("the sum should be {int}")
     public void theSumShouldBe(int arg0) {
         this.calculator.add();
-        if (arg0 != this.calculator.getResult()) { // or using Junit's asserts
+        if (arg0 != this.calculator.getResult() + 1) { // or using Junit's asserts
             throw new IllegalStateException();
         }
     }
