@@ -26,4 +26,22 @@ public class Calculator {
         }
         return numbers.get(0);
     }
+
+    public void multiply(){
+        if(numbers.size() != 2){
+            throw new IllegalStateException();
+        }
+        numbers.set(0, numbers.get(0) * numbers.get(1));
+        numbers.remove(1);
+    }
+    public void divide(){
+        if(numbers.size() != 2) {
+            throw new IllegalStateException();
+        }
+        if(numbers.get(1) == 0) {
+            throw new IllegalArgumentException();
+        }
+        numbers.set(0, numbers.get(0) / numbers.get(1));
+        numbers.remove(1);
+    }
 }

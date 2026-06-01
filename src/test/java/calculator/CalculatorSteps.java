@@ -25,4 +25,35 @@ public class CalculatorSteps {
             throw new IllegalStateException();
         }
     }
+    @When("I multiply {int} and {int}")
+    public void i_multiply_and(int arg0, int arg1) {
+        // Write code here that turns the phrase above into concrete actions
+        this.calculator.enter(arg0);
+        this.calculator.enter(arg1);
+    }
+
+    @Then("the product should be {int}")
+    public void the_product_should_be(int int1) {
+        // Write code here that turns the phrase above into concrete actions
+        this.calculator.multiply();
+        if(int1 != this.calculator.getResult()){
+            throw new IllegalStateException();
+        }
+    }
+
+    @When("I divide {int} and {int}")
+    public void i_divide_and(int int1, int int2) {
+        // Write code here that turns the phrase above into concrete actions
+        this.calculator.enter(int1);
+        this.calculator.enter(int2);
+    }
+    @Then("the quotient should be {int}")
+    public void the_quotient_should_be(int int1) {
+        // Write code here that turns the phrase above into concrete actions
+        this.calculator.divide();
+        if(int1 != this.calculator.getResult()) {
+            throw  new IllegalStateException();
+        }
+    }
+
 }
