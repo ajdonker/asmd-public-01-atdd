@@ -3,10 +3,13 @@ package calculator;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.*;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class CalculatorSteps {
     private int res = 0;
     private Calculator calculator;
-
+    private Exception exception;
     @Given("I have a Calculator")
     public void iHaveACalculator() {
         this.calculator = new Calculator();
@@ -46,14 +49,43 @@ public class CalculatorSteps {
         // Write code here that turns the phrase above into concrete actions
         this.calculator.enter(int1);
         this.calculator.enter(int2);
+        try {
+            this.calculator.divide();
+        }
+        catch (Exception e) {
+            this.exception = e;
+        }
     }
     @Then("the quotient should be {int}")
     public void the_quotient_should_be(int int1) {
         // Write code here that turns the phrase above into concrete actions
-        this.calculator.divide();
         if(int1 != this.calculator.getResult()) {
             throw  new IllegalStateException();
         }
     }
+    @Then("an IllegalArgumentException should be thrown")
+    public void anIllegalArgumentExceptionShouldBeThrown() {
+        assertNotNull(exception);
+        assertInstanceOf(IllegalArgumentException.class, exception);
+    }
 
+    @When("I exp {int} and {int}")
+    public void iExpAnd(int arg0, int arg1) {
+        // Write code here that turns the phrase above into concrete actions
+        this.calculator.enter(arg0);
+        this.calculator.enter(arg1);
+        try {
+            this.calculator.exp();
+        } catch (Exception e) {
+            this.exception = e;
+        }
+    }
+
+    @Then("I get {int}")
+    public void iGet(int arg0) {
+        // Write code here that turns the phrase above into concrete actions
+        if(arg0 != this.calculator.getResult()) {
+            throw new IllegalStateException();
+        }
+    }
 }

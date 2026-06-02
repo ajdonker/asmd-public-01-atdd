@@ -15,3 +15,14 @@ Gives ability to multiply numbers.
     Given I have a Calculator
     When I multiply 1 and 3
     Then the product should be 3
+
+  Scenario Outline: Mult two numbers
+    Given I have a Calculator
+    When I multiply <arg0> and <arg1>
+    Then the product should be <res>
+    Examples:
+      | arg0 | arg1 | res |
+      | 1    | 2    | 2   |
+      | 1    | -1   | -1   |
+      | -5   | -6   | 30 |
+      | 5    | 6    | 30 |
